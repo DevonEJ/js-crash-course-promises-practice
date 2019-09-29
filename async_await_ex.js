@@ -1,3 +1,5 @@
+// Example using only Promise with async-await...
+
 function makeRequest(webpage) {
     return new Promise((resolve, reject) => {
         console.log(`Sending your request to: ${webpage}`)
@@ -19,11 +21,12 @@ function formatRequest(message) {
 }
 
 
-makeRequest('Best Website Ever').then(response => {
+// Call these functions with an async function - using await to force functions to be executed synchronously
+async function processAllWithAsync(webpage) {
+    const response = await makeRequest(webpage)
     console.log(`Processing Request...`)
-    return formatRequest(response)
-}).then(formattedRequest => {
+    const formattedRequest = await formatRequest(response)
     console.log(formattedRequest)
-}).catch(err => {
-    console.log(`Oops: ${err}`)
-})
+}
+
+processAllWithAsync(`Best Website Ever`)
